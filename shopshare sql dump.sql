@@ -1,0 +1,352 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Dec 11, 2020 at 08:51 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `shopshare`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogger`
+--
+
+CREATE TABLE `blogger` (
+  `BloggerID` int(10) NOT NULL,
+  `NickName` varchar(20) DEFAULT NULL,
+  `Email` varchar(20) DEFAULT NULL,
+  `Interest` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `blogger`
+--
+
+INSERT INTO `blogger` (`BloggerID`, `NickName`, `Email`, `Interest`) VALUES
+(1123456789, 'Frank', '456@gmail.com', 'shoes'),
+(1234567890, 'Bill', '123@gmail.com', 'shoes'),
+(1234567891, 'Nancy', '135@gamail.com', 'Ties');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friend`
+--
+
+CREATE TABLE `friend` (
+  `FriendID` int(10) NOT NULL,
+  `FriendName` varchar(20) NOT NULL,
+  `BloggerID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `friend`
+--
+
+INSERT INTO `friend` (`FriendID`, `FriendName`, `BloggerID`) VALUES
+(1123456789, 'Frank', 1234567890),
+(1234567890, 'Bill', 1123456789),
+(1234567898, 'Frank', 1234567890);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friendship`
+--
+
+CREATE TABLE `friendship` (
+  `Year_in_friendship` int(3) NOT NULL,
+  `FriendID` int(10) NOT NULL,
+  `BloggerID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `friendship`
+--
+
+INSERT INTO `friendship` (`Year_in_friendship`, `FriendID`, `BloggerID`) VALUES
+(2, 1123456789, 1234567890),
+(2, 1234567890, 1123456789),
+(1, 1234567898, 1234567890);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `info_contain_review`
+--
+
+CREATE TABLE `info_contain_review` (
+  `number of likes` int(5) NOT NULL,
+  `InfoID` int(10) NOT NULL,
+  `ReviewID` int(10) NOT NULL,
+  `BloggerID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `info_contain_review`
+--
+
+INSERT INTO `info_contain_review` (`number of likes`, `InfoID`, `ReviewID`, `BloggerID`) VALUES
+(200, 1, 12345, 1234567890),
+(500, 1, 12346, 1123456789),
+(400, 2, 12346, 1234567890);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leave a message`
+--
+
+CREATE TABLE `leave a message` (
+  `content` varchar(500) NOT NULL,
+  `FriendID` int(10) NOT NULL,
+  `BloggerID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `leave a message`
+--
+
+INSERT INTO `leave a message` (`content`, `FriendID`, `BloggerID`) VALUES
+('How do you like the Bose Headset?', 1123456789, 1234567890),
+('How do you like the Asus Motherboard?', 1234567890, 1123456789);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchaseinfo`
+--
+
+CREATE TABLE `purchaseinfo` (
+  `BloggerID` int(10) NOT NULL,
+  `InfoID` int(10) NOT NULL,
+  `ItemName` varchar(20) NOT NULL,
+  `PurchasePrice` int(10) NOT NULL,
+  `Attitude` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `purchaseinfo`
+--
+
+INSERT INTO `purchaseinfo` (`BloggerID`, `InfoID`, `ItemName`, `PurchasePrice`, `Attitude`) VALUES
+(1123456789, 1, 'Nike Shoes', 200, 'Like'),
+(1123456789, 2, 'ASUS Motherboard', 270, 'Dislike'),
+(1234567890, 1, 'AJ', 220, 'Like'),
+(1234567890, 2, 'Bose Headset', 150, 'Like');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `ReviewID` int(5) NOT NULL,
+  `PurchaseWeb` varchar(8000) NOT NULL,
+  `Description` varchar(500) NOT NULL,
+  `Photo` blob,
+  `InfoID` int(10) NOT NULL,
+  `BloggerID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`ReviewID`, `PurchaseWeb`, `Description`, `Photo`, `InfoID`, `BloggerID`) VALUES
+(12345, 'https://www.nike.com/t/air-jordan-1-mid-se-mens-shoe-GR4N79/DC1419-700?nikemt=true&cp=94940895952_search_%7cPRODUCT_GROUP%7cGOOGLE%7c71700000041569911%7cAll_X_X_X_X-Device_X_Jordan-FullPrice_X%7c%7cc&&ds_e_ad_type=pla&gclid=CjwKCAiAiML-BRAAEiwAuWVggj4WCHbXpc0TEYK4c5AkgAJyID8DLxZulgI-KIFa8aW5_abkoq3quRoC2NAQAvD_BwE&gclsrc=aw.ds', 'Looks Cool', 'ˇÿˇ‡\0JFIF\0\0\0\0\0\0ˇ€\0C\0	\n\n			\n\n		\r\r\nˇ€\0C	ˇ¿\0\0:\0d\"\0ˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0\0	\nˇƒ\00\0\0\0\0\0\0\0!	\"12ASí#r±QaBqëˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0\0ˇƒ\0#\0\0\0\0\0\0\0\0\0\0\0!\"1ÅAq¡—ˇ⁄\0\0\0?\0Ÿﬁöi†\ZÛróƒm_Úªı∫Õkßh“j€ÖRS¡HÎa§rwE\0ü,¿$kµq∏€Ïˆ˙´µ⁄∫ûäÜä©©©©ïcäëK<éÏ@UUíH\0N∞ì÷uÊ„Ω4Xù€æMI∑x•vYuº÷!•∑\\™Yh·Öûzyg8kYö•Tö@‡k;lUE…ñå\\ûô8ûmág∂◊º·U¶ˇ\0CÕM%E∂≤:ò„ô@-2¿e%Or9uÌkÁ€k‡ö€õµeã3Ω·u∆î¥Y1+ı#4…@ÍÚFÏ‰0C÷‹è<rßkæÖÚÔR◊‰ÀÌæ°≤ÎVMMK\r™lbÎm4∆û∂ûH•3<o$í˚\0ºã‰ûA ÚrØU\\⁄ã·ø‹ïm,Æ∆WÀÛ‚ø–‘59~a¸W˙\Z¢∑+y6≥gmÇÔπŸÌõÅ„y!J ê\'©	«_fÃì‘ºà’èë„]&ee¶±NıÌ:ÙÅlt[vstΩéÆô^Ç…T>Kw“?„ÓÛ:™1_ﬁê≤€≠=íÉz-¥uï‘ÎIUoâ?”OQBø„À˘<œ#@d&öÚÒÃ£Ã-q_1,äŸ{∂œœj≤›YL¡‡Ù…*x èÈØS@4”MoŒ˘Ì‹+ÊŸ≠¬°Æ¯Ì%5]¿¨≈ú9é%?3øJ=\nTr=^ËËﬂ∑j—~ƒÔ0·ó À5›®je …QN ëQâñ8Í„ç\'x‘<¢\"¿8åÚBÚ¬…Ôø¶ŒÁê◊_∂ Èπ–\\nì‰Rˇ\0o∂_,u∑à,ee\\”\'Wq ı»äŒhÅzZÇ¬ˆª|í±§‹?Iy5/TjÏ¯ûÂ¡OIﬁÒ √Bó\nXÈ·¯ï@ÃW¿=Gñ◊<’˘ËkWŸu≥◊%Uvÿh≥<¶’&ÈÔÂ˜?∏›ÁË£¶ØyÌ‘¥íCBÜY¢∑—…	•ô\'•vWI#`ïoΩ«A#–πG©ÿ±-›‹MöÕ∂/5»líE\r5∂ñŸåE]WwÑ$ãWUX≠\'D»ƒvÇ(çb·J!\"µ¥ÏÖ\r¢˚n hΩ\ZÓw[UY≠¶®ó1°ùª›˛˜[â/¨≤~È2p‡é|ÒŒÆ%}ﬂwn.ÂΩ<n9˙<7LpØ˘πùFû©√2µ¶˛	úì‚=å.¶ßØ¬2\Z¨´h}1◊`ˆú≈fJtŒkƒàkUÀöáµƒ≤TS ‹4Hâ,pïXò\'\0òæó,9Ö∑)Æ∫dõÄ∑Z*ä)a∂⁄m¯˝5Æ›A0t¨jµW¥¿u‘2Ä¸u÷>‡]°ä;˜•\\∆Í—¨~˝d∏¨ézy„ì˙èéß¯|:õèéÆÿ“e\"æ\nöΩ±ÆƒÈQY%éæ¶ÉØ†©‡\"—M2∑ø”‡≤é9<í\08OKdµ*‰“^‹ø%’±UÌy…”ıã∫π& zqÕ∑\'Ì-ÓŸEM≤\"∏ÇjöàiñnñX«ﬁÓ`TîÅÎAY6WíÊW˙úõ2»nó´≠C+ÕWp©jâÊnèw™I	fn(ÚHÈ\0q»„ËÁppº[qq+¶ö„–ﬁÏóäQMYC0JÑ<ÇÆ¨+©¨™ C\0F™wŸ5ª6À‰ıõ3qLÜ“Õ$Ò”ﬁ¶ß¢™Ñ=®É$åí∑A\0…ƒ ∑ûÄ5Ë ¥¶JôC›·Y˙∏˙y~oØìÙ‰˘ÛÆÕ\n8te,:S©P9\0Ç◊˛Ò‰Chˆh˙ π3S‹v‚û€Jz\rfAotn~ü≥3±‡r=Ô¶Ø>3Ïõ»\r≤öLü.»†´jU““Y≠“$PÀÕrD£R|·†5˛∑9≠ı+qß®ö9a#¶DfR8Ú≠»?O˝é>ûu{v„◊©Ω≥ΩEw∑ÓÕ˙Ïä?L»+⁄„I2#+4%\'bb\r–d) R·\\s´Ωõ{,∑ÊŸY(¿®ø]§eÎZÙVŸz¡˘zRÆPG«íX„«éuK⁄=ö^Æk.)KU∂t÷‘iµeE˛ﬂŸ Ò‘\"ô‰Ûá„‰q„@m£”∆ÔSo∆Àbª±Moz~£f®ße‡GSØ·=‚{}ÿ§Ë$ıÈ,‰π6jm[≥ÿ∆’Ÿö•ÈÏÜ&ñ†*º”<ç,“Wp°•íF\n∫Aì«:hÉ¶öhöi†\Zi¶Äúø0˛+˝\rCSóÊ≈°®höi†\Zi¶Äi¶ö}ÈæÎ˛GNÙﬂuˇ\0#®i†\'ﬁõÓø‰tÔM˜_Ú:Üö}ÈæÎ˛GNÙﬂuˇ\0#®i†9eñP√â\\{´ˇ\0#˛£ﬁõÓø‰tóÊ≈°®h	˜¶˚Ø˘;”}◊¸é°¶Äüzo∫ˇ\0ë”Ω7›»Í\Zh	˜¶˚Ø˘5\r4ˇŸ', 1, 1234567890),
+(12346, 'https://www.nike.com/w/mens-running-shoes-37v7jznik1zy7ok', 'Comfortable', 'ˇÿˇ‡\0JFIF\0\0\0\0\0\0ˇ€\0(\0(\0(\0(\0+\0(\0-\02\02\0-\0?\0D\0<\0D\0?\0]\0U\0N\0N\0U\0]\0å\0d\0l\0d\0l\0d\0å\0’\0Ö\0õ\0Ö\0Ö\0õ\0Ö\0’\0º\0‰\0π\0≠\0π\0‰\0ºR	\0Î\0Î	RÜH6HÜŸßßŸS5S\n\n\0(\0(\0(\0(\0+\0(\0-\02\02\0-\0?\0D\0<\0D\0?\0]\0U\0N\0N\0U\0]\0å\0d\0l\0d\0l\0d\0å\0’\0Ö\0õ\0Ö\0Ö\0õ\0Ö\0’\0º\0‰\0π\0≠\0π\0‰\0ºR	\0Î\0Î	RÜH6HÜŸßßŸS5S\n\nˇ¬\0\0€ï\"\0ˇƒ\0\Z\0\0\0\0\0\0\0\0\0\0\0ˇ⁄\0\0\0\0\0˙`\0\0\0\0@\0\0\0\0Ä\0\0\0\0\0\0\0 \0\0\n\0\0\0\0\0\0\0\0@\0\0(\0\0\0\0\0h \0\0ÜZ\0\0\r\0@\0?+öt˜ÙÄ\0\Z\0Ä\0GŒ˘˛fª˛ñÄ\04\0@\0û/ñKoø’Ë\0†\0Ä~géV◊Ø—Ó†\0–\0 áõè \Z[æøß∞\0–\0üÃq¯Ü‚ÔﬂÈtÄ\r\0\0|Ô78h≠˙ˆwl†\0º2„ÑZö]zzvuÏÄ\0 Û˘∏z„ã»i4]oZËÈË–h\0ô‚øKóõãR™Ó€ÆØ¢\0\0á\'kËoÉ«ã•£[ˇ\0C†l\0+_EÛûZí“Ôi7ÌÙ}MÄ\0E¯[”»æ~8zjÈò1È”Ùk`\0ﬂõŒ\0VfBôy{uw›Ä\0+ÀÂBÖàXe”Ô¡â·””Ùv\0\0W@EHgË„√ùÁÁ”~‡\0\0Øù…VQ\0âwÂsü;Ø— \0\0|øXz˙x˘Á«ßÔ\0A@	õ5◊·ÀÜøF@\0M¸ÓE\0D±õr∆?ˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0\0ˇ⁄\0\0\0\0\0\0\n\0\0(\0\0†\0\0\0\0j †H Äº‚ÆA5\0ﬂ<™‹¡4Ä/Cú•€8)\0È©ùsä÷Ø(§ÈSRJÉöê[sŸäVÙYbI¨≤\0]iPL‹ﬂˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0ˇ⁄\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0†\0\0BíÄ\0É;h\0ÄLÓâ-\0dÿLÕh	lIñË@3*(XŸ\0$ÅFÚµ\0$ÄU∞‘\0LÇäØˇƒ\0+\0\0\0\0\0\0\0!1@AQ 0PaR2BÅÄˇ⁄\0\0?\0ˇ\0–%îr¬S¡ ÓI2≠fsrc<)‚™/yOM˛è«b*jkv⁄Ê^_ ƒJ8≤∂q’≈‘¸]zöFë…ï\rÅı	J≥!∏2ñ!jlvoâv§òIbX «ÅÍÊ@÷; 8Æ¿Aà{ù#*ºè`7cî´ög ƒuqu?UÙ!Û	ûeoÂÏÇDSvSple,Bæ«f¯J’5∂Cì+é®Ca†iKWc∫≈uqu?^ßÙÏ\'|ªÉ*.†G∂ 6Ä¯1_Mà$òøÿE®è√u’jh_∏«5¶Œ\Z√ÅyÃ™ö[›\rÁx<™‹ƒƒ∏Ôx∏•<à¨¨.\r˙¢@ôR°v&Ä$ÿ	B‘◊Iˇ\0ezz„¯¥e,c°SÎëïÃ∏Äë)T—Px=V&ßÙÖbÆr\"ï¨§®\Zªâupi¥tjM§«@¬—–©∑@¶„ÓP´®i<ı5S±ÙwàÏå\nò¨ï÷„fÔ5£Ì¡óµ˜⁄2ÜÈ„èdxSoÒ∑ë4\"FJ÷05ƒ•PTcûú∆b>˝úïä5‘ÿ ÿçtÄûs∏1®©ÜãiøÍ`•SıÇÉw\"~˚OƒÉÃ≤\0Ö°&_ÏdÑ^Ü‚“ãÖmˆ=åV‘:Qñ%4‘øü@óı‹ÀüÊ∑\"^˝Á¯eâÒ4˘c4®ÌïÚ‚q/cïrª¨A  µ?»êÇcÿ¥∞öVXg{Cù\Zó[ﬁ‹\0\'¸Ùúƒ}ﬁ:î$ôCME\Z®\\Jt5è§‚hˇ\0qëËNTÌ[†0î(=÷Ï%fÏrG]BSr¶–˝Gƒ’ÿj==z\Z\r«ÙFF‡⁄\ZÆEã`Gapåe≤eS{&0ﬂß6ac+—4€Î◊hŒs†ÅÎ\"û%|A‘ià¬Z¬%ä›A\n¿É+aäÓ≤›{√F(·á\"[\rXá&∆V6CxUˇ\0i¯œô£Ó#È=Hò•≈á∫r9sÃ9ø3ˇƒ\0 \0\0\0\0\0\0\0\0\0\00 1@!A`ˇ⁄\0?\0˛◊ØNí<-ÂÒ∑èIMGﬁ]«K‡\n-¢n9∞«N`¢^\r¢_ëT∂R∂¢ÿM§±≈/îr±˙e∂â:õré$≠Áˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0 0@1!Apˇ⁄\0?\0¯sbŸbÿcWŒöq{DâË!©ãù¥˘âvØ^n∂=I ÷)¨ˇŸ', 1, 1123456789),
+(12346, 'https://www.bose.com/en_us/index.html?mc=25_PS_BD_BO_00_GO_&gclid=CjwKCAiAiML-BRAAEiwAuWVggp9JZwv3hzuWD4Mc2q09ruHKqzFiGVP1HaRxp44qdGq0qHWT8ezgNRoCkXAQAvD_BwE&gclsrc=aw.ds', 'Sound quality is nice', NULL, 2, 1234567890);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `share`
+--
+
+CREATE TABLE `share` (
+  `BloggerID` int(10) NOT NULL,
+  `InfoID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `share`
+--
+
+INSERT INTO `share` (`BloggerID`, `InfoID`) VALUES
+(1123456789, 1),
+(1123456789, 2),
+(1234567890, 1),
+(1234567890, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tag`
+--
+
+CREATE TABLE `tag` (
+  `ReviewID` int(10) NOT NULL,
+  `FriendID` int(10) NOT NULL,
+  `Time_tag` datetime(6) NOT NULL,
+  `BloggerID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`ReviewID`, `FriendID`, `Time_tag`, `BloggerID`) VALUES
+(12345, 1234567890, '2020-12-03 16:04:12.000000', 1123456789),
+(12346, 1123456789, '2020-12-01 16:04:26.000000', 1234567890);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `blogger`
+--
+ALTER TABLE `blogger`
+  ADD PRIMARY KEY (`BloggerID`);
+
+--
+-- Indexes for table `friend`
+--
+ALTER TABLE `friend`
+  ADD PRIMARY KEY (`FriendID`),
+  ADD KEY `BloggerID` (`BloggerID`);
+
+--
+-- Indexes for table `friendship`
+--
+ALTER TABLE `friendship`
+  ADD PRIMARY KEY (`FriendID`,`BloggerID`),
+  ADD KEY `BloggerID` (`BloggerID`);
+
+--
+-- Indexes for table `info_contain_review`
+--
+ALTER TABLE `info_contain_review`
+  ADD PRIMARY KEY (`InfoID`,`ReviewID`,`BloggerID`),
+  ADD KEY `InfoID` (`InfoID`),
+  ADD KEY `ReviewID` (`ReviewID`),
+  ADD KEY `BloggerID` (`BloggerID`);
+
+--
+-- Indexes for table `leave a message`
+--
+ALTER TABLE `leave a message`
+  ADD PRIMARY KEY (`FriendID`,`BloggerID`),
+  ADD KEY `FriendID` (`FriendID`,`BloggerID`),
+  ADD KEY `BloggerID` (`BloggerID`);
+
+--
+-- Indexes for table `purchaseinfo`
+--
+ALTER TABLE `purchaseinfo`
+  ADD PRIMARY KEY (`BloggerID`,`InfoID`),
+  ADD KEY `BloggerID` (`BloggerID`),
+  ADD KEY `InfoID` (`InfoID`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`ReviewID`,`InfoID`,`BloggerID`),
+  ADD KEY `InfoID` (`InfoID`),
+  ADD KEY `BloggerID` (`BloggerID`);
+
+--
+-- Indexes for table `share`
+--
+ALTER TABLE `share`
+  ADD PRIMARY KEY (`BloggerID`,`InfoID`),
+  ADD KEY `BloggerID` (`BloggerID`),
+  ADD KEY `InfoID` (`InfoID`);
+
+--
+-- Indexes for table `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`ReviewID`,`FriendID`,`BloggerID`),
+  ADD KEY `ReviewID` (`ReviewID`,`FriendID`),
+  ADD KEY `BloggerID` (`BloggerID`),
+  ADD KEY `FriendID` (`FriendID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `friendship`
+--
+ALTER TABLE `friendship`
+  ADD CONSTRAINT `friendship_ibfk_1` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`),
+  ADD CONSTRAINT `friendship_ibfk_2` FOREIGN KEY (`FriendID`) REFERENCES `friend` (`FriendID`);
+
+--
+-- Constraints for table `info_contain_review`
+--
+ALTER TABLE `info_contain_review`
+  ADD CONSTRAINT `info_contain_review_ibfk_1` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`),
+  ADD CONSTRAINT `info_contain_review_ibfk_2` FOREIGN KEY (`ReviewID`) REFERENCES `review` (`ReviewID`),
+  ADD CONSTRAINT `info_contain_review_ibfk_3` FOREIGN KEY (`InfoID`) REFERENCES `purchaseinfo` (`InfoID`);
+
+--
+-- Constraints for table `leave a message`
+--
+ALTER TABLE `leave a message`
+  ADD CONSTRAINT `leave a message_ibfk_1` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`),
+  ADD CONSTRAINT `leave a message_ibfk_2` FOREIGN KEY (`FriendID`) REFERENCES `friend` (`FriendID`);
+
+--
+-- Constraints for table `purchaseinfo`
+--
+ALTER TABLE `purchaseinfo`
+  ADD CONSTRAINT `purchaseinfo_ibfk_1` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`);
+
+--
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`InfoID`) REFERENCES `purchaseinfo` (`InfoID`),
+  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`);
+
+--
+-- Constraints for table `share`
+--
+ALTER TABLE `share`
+  ADD CONSTRAINT `share_ibfk_1` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`),
+  ADD CONSTRAINT `share_ibfk_2` FOREIGN KEY (`InfoID`) REFERENCES `purchaseinfo` (`InfoID`);
+
+--
+-- Constraints for table `tag`
+--
+ALTER TABLE `tag`
+  ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`BloggerID`) REFERENCES `blogger` (`BloggerID`),
+  ADD CONSTRAINT `tag_ibfk_2` FOREIGN KEY (`FriendID`) REFERENCES `friend` (`FriendID`),
+  ADD CONSTRAINT `tag_ibfk_3` FOREIGN KEY (`ReviewID`) REFERENCES `review` (`ReviewID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
